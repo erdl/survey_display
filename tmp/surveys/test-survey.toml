@@ -1,0 +1,19 @@
+[settings]
+is-active = true
+survey-code = 123
+
+[[question]]
+question-code = 123
+question-text = "question-one"
+options = [
+  { text = "rsp-one", code = 123 },
+  { text = "rsp-two", code = 456 }
+]
+
+[[question]]
+question-code = 456
+question-text = "question-two"
+options = [
+  { text = "rsp-one", code = 123 },
+  { text = "rsp-two", code = 456 }
+]

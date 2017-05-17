@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+<link rel='stylesheet' href='/static/style.css' type='text/css' media='screen' charset='utf-8'>
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      Main
+    </title>
+    <script type="text/javascript" src="/static/main.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var seed = {{ seed | tojson | safe }};
+      Elm.Main.fullscreen(seed);
+    </script>
+  </body>
+
+</html>
