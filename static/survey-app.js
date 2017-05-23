@@ -1,6 +1,4 @@
-<!DOCTYPE HTML>
-<html><head><meta charset="UTF-8"><title>Main</title><style>html,head,body { padding:0; margin:0; }
-body { font-family: calibri, helvetica, arial, sans-serif; }</style><script type="text/javascript">
+
 (function() {
 'use strict';
 
@@ -136,6 +134,7 @@ function A9(fun, a, b, c, d, e, f, g, h, i)
     ? fun.func(a, b, c, d, e, f, g, h, i)
     : fun(a)(b)(c)(d)(e)(f)(g)(h)(i);
 }
+
 //import Native.List //
 
 var _elm_lang$core$Native_Array = function() {
@@ -1102,7 +1101,8 @@ return {
 	fromJSArray: fromJSArray
 };
 
-}();//import Native.Utils //
+}();
+//import Native.Utils //
 
 var _elm_lang$core$Native_Basics = function() {
 
@@ -1242,7 +1242,8 @@ return {
 	isInfinite: isInfinite
 };
 
-}();//import //
+}();
+//import //
 
 var _elm_lang$core$Native_Utils = function() {
 
@@ -1729,7 +1730,8 @@ return {
 	toString: toString
 };
 
-}();var _elm_lang$core$Basics$never = function (_p0) {
+}();
+var _elm_lang$core$Basics$never = function (_p0) {
 	never:
 	while (true) {
 		var _p1 = _p0;
@@ -1854,6 +1856,7 @@ var _elm_lang$core$Basics$LT = {ctor: 'LT'};
 var _elm_lang$core$Basics$JustOneMore = function (a) {
 	return {ctor: 'JustOneMore', _0: a};
 };
+
 var _elm_lang$core$Maybe$withDefault = F2(
 	function ($default, maybe) {
 		var _p0 = maybe;
@@ -1926,6 +1929,7 @@ var _elm_lang$core$Maybe$map5 = F6(
 			return _elm_lang$core$Maybe$Nothing;
 		}
 	});
+
 //import Native.Utils //
 
 var _elm_lang$core$Native_List = function() {
@@ -2062,7 +2066,8 @@ return {
 	sortWith: F2(sortWith)
 };
 
-}();var _elm_lang$core$List$sortWith = _elm_lang$core$Native_List.sortWith;
+}();
+var _elm_lang$core$List$sortWith = _elm_lang$core$Native_List.sortWith;
 var _elm_lang$core$List$sortBy = _elm_lang$core$Native_List.sortBy;
 var _elm_lang$core$List$sort = function (xs) {
 	return A2(_elm_lang$core$List$sortBy, _elm_lang$core$Basics$identity, xs);
@@ -2614,6 +2619,7 @@ var _elm_lang$core$List$indexedMap = F2(
 				_elm_lang$core$List$length(xs) - 1),
 			xs);
 	});
+
 var _elm_lang$core$Array$append = _elm_lang$core$Native_Array.append;
 var _elm_lang$core$Array$length = _elm_lang$core$Native_Array.length;
 var _elm_lang$core$Array$isEmpty = function (array) {
@@ -2668,6 +2674,7 @@ var _elm_lang$core$Array$repeat = F2(
 			_elm_lang$core$Basics$always(e));
 	});
 var _elm_lang$core$Array$Array = {ctor: 'Array'};
+
 //import Native.Utils //
 
 var _elm_lang$core$Native_Char = function() {
@@ -2681,7 +2688,8 @@ return {
 	toLocaleLower: function(c) { return _elm_lang$core$Native_Utils.chr(c.toLocaleLowerCase()); }
 };
 
-}();var _elm_lang$core$Char$fromCode = _elm_lang$core$Native_Char.fromCode;
+}();
+var _elm_lang$core$Char$fromCode = _elm_lang$core$Native_Char.fromCode;
 var _elm_lang$core$Char$toCode = _elm_lang$core$Native_Char.toCode;
 var _elm_lang$core$Char$toLocaleLower = _elm_lang$core$Native_Char.toLocaleLower;
 var _elm_lang$core$Char$toLocaleUpper = _elm_lang$core$Native_Char.toLocaleUpper;
@@ -2723,6 +2731,7 @@ var _elm_lang$core$Char$isHexDigit = function ($char) {
 		_elm_lang$core$Native_Utils.chr('F'),
 		$char));
 };
+
 //import Native.Utils //
 
 var _elm_lang$core$Native_Scheduler = function() {
@@ -3003,7 +3012,8 @@ return {
 	rawSend: rawSend
 };
 
-}();//import //
+}();
+//import //
 
 var _elm_lang$core$Native_Platform = function() {
 
@@ -3562,6 +3572,7 @@ return {
 };
 
 }();
+
 var _elm_lang$core$Platform_Cmd$batch = _elm_lang$core$Native_Platform.batch;
 var _elm_lang$core$Platform_Cmd$none = _elm_lang$core$Platform_Cmd$batch(
 	{ctor: '[]'});
@@ -3576,11 +3587,13 @@ _elm_lang$core$Platform_Cmd_ops['!'] = F2(
 	});
 var _elm_lang$core$Platform_Cmd$map = _elm_lang$core$Native_Platform.map;
 var _elm_lang$core$Platform_Cmd$Cmd = {ctor: 'Cmd'};
+
 var _elm_lang$core$Platform_Sub$batch = _elm_lang$core$Native_Platform.batch;
 var _elm_lang$core$Platform_Sub$none = _elm_lang$core$Platform_Sub$batch(
 	{ctor: '[]'});
 var _elm_lang$core$Platform_Sub$map = _elm_lang$core$Native_Platform.map;
 var _elm_lang$core$Platform_Sub$Sub = {ctor: 'Sub'};
+
 var _elm_lang$core$Platform$hack = _elm_lang$core$Native_Scheduler.succeed;
 var _elm_lang$core$Platform$sendToSelf = _elm_lang$core$Native_Platform.sendToSelf;
 var _elm_lang$core$Platform$sendToApp = _elm_lang$core$Native_Platform.sendToApp;
@@ -3590,6 +3603,7 @@ var _elm_lang$core$Platform$Program = {ctor: 'Program'};
 var _elm_lang$core$Platform$Task = {ctor: 'Task'};
 var _elm_lang$core$Platform$ProcessId = {ctor: 'ProcessId'};
 var _elm_lang$core$Platform$Router = {ctor: 'Router'};
+
 var _elm_lang$core$Result$toMaybe = function (result) {
 	var _p0 = result;
 	if (_p0.ctor === 'Ok') {
@@ -3731,6 +3745,7 @@ var _elm_lang$core$Result$fromMaybe = F2(
 			return _elm_lang$core$Result$Err(err);
 		}
 	});
+
 var _elm_lang$core$Task$onError = _elm_lang$core$Native_Scheduler.onError;
 var _elm_lang$core$Task$andThen = _elm_lang$core$Native_Scheduler.andThen;
 var _elm_lang$core$Task$spawnCmd = F2(
@@ -3927,6 +3942,7 @@ var _elm_lang$core$Task$cmdMap = F2(
 			A2(_elm_lang$core$Task$map, tagger, _p11._0));
 	});
 _elm_lang$core$Native_Platform.effectManagers['Task'] = {pkg: 'elm-lang/core', init: _elm_lang$core$Task$init, onEffects: _elm_lang$core$Task$onEffects, onSelfMsg: _elm_lang$core$Task$onSelfMsg, tag: 'cmd', cmdMap: _elm_lang$core$Task$cmdMap};
+
 //import Native.Utils //
 
 var _elm_lang$core$Native_Debug = function() {
@@ -3956,7 +3972,8 @@ return {
 	log: F2(log)
 };
 
-}();//import Maybe, Native.List, Native.Utils, Result //
+}();
+//import Maybe, Native.List, Native.Utils, Result //
 
 var _elm_lang$core$Native_String = function() {
 
@@ -4295,6 +4312,7 @@ return {
 };
 
 }();
+
 var _elm_lang$core$String$fromList = _elm_lang$core$Native_String.fromList;
 var _elm_lang$core$String$toList = _elm_lang$core$Native_String.toList;
 var _elm_lang$core$String$toFloat = _elm_lang$core$Native_String.toFloat;
@@ -4338,6 +4356,7 @@ var _elm_lang$core$String$fromChar = function ($char) {
 	return A2(_elm_lang$core$String$cons, $char, '');
 };
 var _elm_lang$core$String$isEmpty = _elm_lang$core$Native_String.isEmpty;
+
 var _elm_lang$core$Dict$foldr = F3(
 	function (f, acc, t) {
 		foldr:
@@ -5254,6 +5273,7 @@ var _elm_lang$core$Dict$diff = F2(
 			t1,
 			t2);
 	});
+
 //import Native.Scheduler //
 
 var _elm_lang$core$Native_Time = function() {
@@ -5280,7 +5300,8 @@ return {
 	setInterval_: F2(setInterval_)
 };
 
-}();var _elm_lang$core$Time$setInterval = _elm_lang$core$Native_Time.setInterval_;
+}();
+var _elm_lang$core$Time$setInterval = _elm_lang$core$Native_Time.setInterval_;
 var _elm_lang$core$Time$spawnHelp = F3(
 	function (router, intervals, processes) {
 		var _p0 = intervals;
@@ -5467,8 +5488,10 @@ var _elm_lang$core$Time$subMap = F2(
 			});
 	});
 _elm_lang$core$Native_Platform.effectManagers['Time'] = {pkg: 'elm-lang/core', init: _elm_lang$core$Time$init, onEffects: _elm_lang$core$Time$onEffects, onSelfMsg: _elm_lang$core$Time$onSelfMsg, tag: 'sub', subMap: _elm_lang$core$Time$subMap};
+
 var _elm_lang$core$Debug$crash = _elm_lang$core$Native_Debug.crash;
 var _elm_lang$core$Debug$log = _elm_lang$core$Native_Debug.log;
+
 //import Maybe, Native.Array, Native.List, Native.Utils, Result //
 
 var _elm_lang$core$Native_Json = function() {
@@ -6044,6 +6067,7 @@ return {
 };
 
 }();
+
 var _elm_lang$core$Json_Encode$list = _elm_lang$core$Native_Json.encodeList;
 var _elm_lang$core$Json_Encode$array = _elm_lang$core$Native_Json.encodeArray;
 var _elm_lang$core$Json_Encode$object = _elm_lang$core$Native_Json.encodeObject;
@@ -6054,6 +6078,7 @@ var _elm_lang$core$Json_Encode$int = _elm_lang$core$Native_Json.identity;
 var _elm_lang$core$Json_Encode$string = _elm_lang$core$Native_Json.identity;
 var _elm_lang$core$Json_Encode$encode = _elm_lang$core$Native_Json.encode;
 var _elm_lang$core$Json_Encode$Value = {ctor: 'Value'};
+
 var _elm_lang$core$Json_Decode$null = _elm_lang$core$Native_Json.decodeNull;
 var _elm_lang$core$Json_Decode$value = _elm_lang$core$Native_Json.decodePrimitive('value');
 var _elm_lang$core$Json_Decode$andThen = _elm_lang$core$Native_Json.andThen;
@@ -6116,6 +6141,7 @@ var _elm_lang$core$Json_Decode$int = _elm_lang$core$Native_Json.decodePrimitive(
 var _elm_lang$core$Json_Decode$bool = _elm_lang$core$Native_Json.decodePrimitive('bool');
 var _elm_lang$core$Json_Decode$string = _elm_lang$core$Native_Json.decodePrimitive('string');
 var _elm_lang$core$Json_Decode$Decoder = {ctor: 'Decoder'};
+
 var _elm_lang$core$Tuple$mapSecond = F2(
 	function (func, _p0) {
 		var _p1 = _p0;
@@ -6142,6 +6168,7 @@ var _elm_lang$core$Tuple$first = function (_p6) {
 	var _p7 = _p6;
 	return _p7._0;
 };
+
 var _elm_lang$virtual_dom$VirtualDom_Debug$wrap;
 var _elm_lang$virtual_dom$VirtualDom_Debug$wrapWithFlags;
 
@@ -8023,6 +8050,7 @@ return {
 };
 
 }();
+
 var _elm_lang$virtual_dom$VirtualDom$programWithFlags = function (impl) {
 	return A2(_elm_lang$virtual_dom$Native_VirtualDom.programWithFlags, _elm_lang$virtual_dom$VirtualDom_Debug$wrapWithFlags, impl);
 };
@@ -8053,6 +8081,7 @@ var _elm_lang$virtual_dom$VirtualDom$Options = F2(
 	});
 var _elm_lang$virtual_dom$VirtualDom$Node = {ctor: 'Node'};
 var _elm_lang$virtual_dom$VirtualDom$Property = {ctor: 'Property'};
+
 var _elm_lang$html$Html$programWithFlags = _elm_lang$virtual_dom$VirtualDom$programWithFlags;
 var _elm_lang$html$Html$program = _elm_lang$virtual_dom$VirtualDom$program;
 var _elm_lang$html$Html$beginnerProgram = function (_p0) {
@@ -8177,6 +8206,7 @@ var _elm_lang$html$Html$details = _elm_lang$html$Html$node('details');
 var _elm_lang$html$Html$summary = _elm_lang$html$Html$node('summary');
 var _elm_lang$html$Html$menuitem = _elm_lang$html$Html$node('menuitem');
 var _elm_lang$html$Html$menu = _elm_lang$html$Html$node('menu');
+
 var _elm_lang$html$Html_Attributes$map = _elm_lang$virtual_dom$VirtualDom$mapProperty;
 var _elm_lang$html$Html_Attributes$attribute = _elm_lang$virtual_dom$VirtualDom$attribute;
 var _elm_lang$html$Html_Attributes$contextmenu = function (value) {
@@ -8526,6 +8556,122 @@ var _elm_lang$html$Html_Attributes$classList = function (list) {
 				A2(_elm_lang$core$List$filter, _elm_lang$core$Tuple$second, list))));
 };
 var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
+
+var _elm_lang$html$Html_Events$keyCode = A2(_elm_lang$core$Json_Decode$field, 'keyCode', _elm_lang$core$Json_Decode$int);
+var _elm_lang$html$Html_Events$targetChecked = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'target',
+		_1: {
+			ctor: '::',
+			_0: 'checked',
+			_1: {ctor: '[]'}
+		}
+	},
+	_elm_lang$core$Json_Decode$bool);
+var _elm_lang$html$Html_Events$targetValue = A2(
+	_elm_lang$core$Json_Decode$at,
+	{
+		ctor: '::',
+		_0: 'target',
+		_1: {
+			ctor: '::',
+			_0: 'value',
+			_1: {ctor: '[]'}
+		}
+	},
+	_elm_lang$core$Json_Decode$string);
+var _elm_lang$html$Html_Events$defaultOptions = _elm_lang$virtual_dom$VirtualDom$defaultOptions;
+var _elm_lang$html$Html_Events$onWithOptions = _elm_lang$virtual_dom$VirtualDom$onWithOptions;
+var _elm_lang$html$Html_Events$on = _elm_lang$virtual_dom$VirtualDom$on;
+var _elm_lang$html$Html_Events$onFocus = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'focus',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onBlur = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'blur',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onSubmitOptions = _elm_lang$core$Native_Utils.update(
+	_elm_lang$html$Html_Events$defaultOptions,
+	{preventDefault: true});
+var _elm_lang$html$Html_Events$onSubmit = function (msg) {
+	return A3(
+		_elm_lang$html$Html_Events$onWithOptions,
+		'submit',
+		_elm_lang$html$Html_Events$onSubmitOptions,
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onCheck = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'change',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetChecked));
+};
+var _elm_lang$html$Html_Events$onInput = function (tagger) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'input',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$targetValue));
+};
+var _elm_lang$html$Html_Events$onMouseOut = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseout',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseOver = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseover',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseLeave = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseleave',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseEnter = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseenter',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseUp = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mouseup',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onMouseDown = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'mousedown',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onDoubleClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'dblclick',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$onClick = function (msg) {
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'click',
+		_elm_lang$core$Json_Decode$succeed(msg));
+};
+var _elm_lang$html$Html_Events$Options = F2(
+	function (a, b) {
+		return {stopPropagation: a, preventDefault: b};
+	});
+
 var _elm_lang$http$Native_Http = function() {
 
 
@@ -8764,6 +8910,7 @@ return {
 };
 
 }();
+
 var _elm_lang$http$Http_Internal$map = F2(
 	function (func, request) {
 		return _elm_lang$core$Native_Utils.update(
@@ -8790,6 +8937,7 @@ var _elm_lang$http$Http_Internal$Header = F2(
 	function (a, b) {
 		return {ctor: 'Header', _0: a, _1: b};
 	});
+
 var _elm_lang$http$Http$decodeUri = _elm_lang$http$Native_Http.decodeUri;
 var _elm_lang$http$Http$encodeUri = _elm_lang$http$Native_Http.encodeUri;
 var _elm_lang$http$Http$expectStringResponse = _elm_lang$http$Native_Http.expectStringResponse;
@@ -8884,9 +9032,18 @@ var _elm_lang$http$Http$StringPart = F2(
 		return {ctor: 'StringPart', _0: a, _1: b};
 	});
 var _elm_lang$http$Http$stringPart = _elm_lang$http$Http$StringPart;
-var _user$project$Types$Model = F3(
+
+var _user$project$Types$Model = F2(
+	function (a, b) {
+		return {pgrm: a, conf: b};
+	});
+var _user$project$Types$Config = F3(
 	function (a, b, c) {
-		return {program: a, session: b, archive: c};
+		return {srvr: a, tick: b, mode: c};
+	});
+var _user$project$Types$Pgrm = F3(
+	function (a, b, c) {
+		return {spec: a, sess: b, arch: c};
 	});
 var _user$project$Types$Option = F2(
 	function (a, b) {
@@ -8908,29 +9065,33 @@ var _user$project$Types$Response = F3(
 	function (a, b, c) {
 		return {time: a, code: b, sels: c};
 	});
+var _user$project$Types$Form = {ctor: 'Form'};
+var _user$project$Types$Kiosk = {ctor: 'Kiosk'};
 var _user$project$Types$Fin = {ctor: 'Fin'};
-var _user$project$Types$Form = function (a) {
-	return {ctor: 'Form', _0: a};
-};
-var _user$project$Types$Kiosk = function (a) {
-	return {ctor: 'Kiosk', _0: a};
+var _user$project$Types$Run = function (a) {
+	return {ctor: 'Run', _0: a};
 };
 var _user$project$Types$Init = {ctor: 'Init'};
-var _user$project$Types$Submit = function (a) {
-	return {ctor: 'Submit', _0: a};
-};
+var _user$project$Types$Submit = {ctor: 'Submit'};
 var _user$project$Types$Select = function (a) {
 	return {ctor: 'Select', _0: a};
+};
+var _user$project$Types$Upload = function (a) {
+	return {ctor: 'Upload', _0: a};
 };
 var _user$project$Types$Update = function (a) {
 	return {ctor: 'Update', _0: a};
 };
+var _user$project$Types$Save = function (a) {
+	return {ctor: 'Save', _0: a};
+};
+var _user$project$Types$Recv = function (a) {
+	return {ctor: 'Recv', _0: a};
+};
 var _user$project$Types$User = function (a) {
 	return {ctor: 'User', _0: a};
 };
-var _user$project$Types$Set = function (a) {
-	return {ctor: 'Set', _0: a};
-};
+
 var _user$project$Comms$jd_option = function () {
 	var code = A2(_elm_lang$core$Json_Decode$field, 'code', _elm_lang$core$Json_Decode$int);
 	var text = A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string);
@@ -8954,37 +9115,285 @@ var _user$project$Comms$jd_survey = function () {
 	var text = A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string);
 	return A4(_elm_lang$core$Json_Decode$map3, _user$project$Types$Survey, text, code, itms);
 }();
-var _user$project$Comms$load_survey = function () {
-	var update = function (r) {
-		return _user$project$Types$Update(
-			A2(_elm_lang$core$Debug$log, 'update: ', r));
-	};
-	var request = A3(_elm_lang$http$Http$post, '', _elm_lang$http$Http$emptyBody, _user$project$Comms$jd_survey);
-	return A2(_elm_lang$http$Http$send, update, request);
-}();
-var _user$project$Comms$handle_update = F2(
-	function (model, result) {
+var _user$project$Comms$je_selection = function (sel) {
+	var opt = _elm_lang$core$Json_Encode$int(sel.opt);
+	var itm = _elm_lang$core$Json_Encode$int(sel.itm);
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'itm', _1: itm},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'opt', _1: opt},
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Comms$je_response = function (rsp) {
+	var sels = _elm_lang$core$Json_Encode$list(
+		A2(_elm_lang$core$List$map, _user$project$Comms$je_selection, rsp.sels));
+	var code = _elm_lang$core$Json_Encode$int(rsp.code);
+	var time = _elm_lang$core$Json_Encode$int(rsp.time);
+	return _elm_lang$core$Json_Encode$object(
+		{
+			ctor: '::',
+			_0: {ctor: '_Tuple2', _0: 'time', _1: time},
+			_1: {
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'code', _1: code},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'sels', _1: sels},
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$Comms$je_archive = function (arch) {
+	var responses = A2(_elm_lang$core$List$map, _user$project$Comms$je_response, arch);
+	return _elm_lang$core$Json_Encode$list(responses);
+};
+var _user$project$Comms$assess_upload = F2(
+	function (pgrm, result) {
 		var _p0 = result;
 		if (_p0.ctor === 'Ok') {
-			return {
-				ctor: '_Tuple2',
-				_0: _elm_lang$core$Native_Utils.update(
-					model,
-					{
-						program: _user$project$Types$Kiosk(_p0._0)
-					}),
-				_1: _elm_lang$core$Platform_Cmd$none
-			};
+			var _p1 = A2(_elm_lang$core$Debug$log, 'upload ok', _p0._0);
+			return _elm_lang$core$Native_Utils.update(
+				pgrm,
+				{
+					arch: {ctor: '[]'}
+				});
 		} else {
-			var _p1 = A2(_elm_lang$core$Debug$log, 'error: ', _p0._0);
-			return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			var _p2 = A2(_elm_lang$core$Debug$log, 'upload err', _p0._0);
+			return pgrm;
 		}
 	});
-var _user$project$Interface$handle_input = F2(
-	function (model, input) {
-		return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+var _user$project$Comms$apply_update = F2(
+	function (pgrm, result) {
+		var _p3 = result;
+		if (_p3.ctor === 'Ok') {
+			return _elm_lang$core$Native_Utils.update(
+				pgrm,
+				{spec: _p3._0, sess: _elm_lang$core$Dict$empty});
+		} else {
+			var _p4 = A2(_elm_lang$core$Debug$log, 'error: ', _p3._0);
+			return pgrm;
+		}
 	});
-var _user$project$Interface$splash = function (text) {
+var _user$project$Comms$initialize_pgrm = function (result) {
+	var _p5 = result;
+	if (_p5.ctor === 'Ok') {
+		return _elm_lang$core$Maybe$Just(
+			{
+				spec: _p5._0,
+				sess: _elm_lang$core$Dict$empty,
+				arch: {ctor: '[]'}
+			});
+	} else {
+		var _p6 = A2(_elm_lang$core$Debug$log, 'http error', _p5._0);
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _user$project$Comms$process_rsp = F2(
+	function (pgrm, rsp) {
+		var _p7 = pgrm;
+		if (_p7.ctor === 'Just') {
+			var _p9 = _p7._0;
+			var _p8 = rsp;
+			if (_p8.ctor === 'Update') {
+				return _elm_lang$core$Maybe$Just(
+					A2(_user$project$Comms$apply_update, _p9, _p8._0));
+			} else {
+				return _elm_lang$core$Maybe$Just(
+					A2(_user$project$Comms$assess_upload, _p9, _p8._0));
+			}
+		} else {
+			var _p10 = rsp;
+			if (_p10.ctor === 'Update') {
+				return _user$project$Comms$initialize_pgrm(_p10._0);
+			} else {
+				var _p11 = A2(_elm_lang$core$Debug$log, 'unexpected comms', rsp);
+				return _elm_lang$core$Maybe$Nothing;
+			}
+		}
+	});
+var _user$project$Comms$pull = function (comm) {
+	return A2(
+		_elm_lang$http$Http$send,
+		comm.wrap,
+		A2(_elm_lang$http$Http$get, comm.send, comm.read));
+};
+var _user$project$Comms$pull_survey = function (config) {
+	var wrap = function (rslt) {
+		return _user$project$Types$Recv(
+			_user$project$Types$Update(rslt));
+	};
+	return _user$project$Comms$pull(
+		{send: config.srvr, read: _user$project$Comms$jd_survey, wrap: wrap});
+};
+var _user$project$Comms$push = F2(
+	function (comm, value) {
+		var body = _elm_lang$http$Http$jsonBody(value);
+		return A2(
+			_elm_lang$http$Http$send,
+			comm.wrap,
+			A3(_elm_lang$http$Http$post, comm.send, body, comm.read));
+	});
+var _user$project$Comms$push_archive = F2(
+	function (config, arch) {
+		var comm = {
+			send: config.srvr,
+			read: _elm_lang$core$Json_Decode$string,
+			wrap: function (rslt) {
+				return _user$project$Types$Recv(
+					_user$project$Types$Upload(rslt));
+			}
+		};
+		var data = _user$project$Comms$je_archive(arch);
+		return A2(_user$project$Comms$push, comm, data);
+	});
+var _user$project$Comms$Comm = F3(
+	function (a, b, c) {
+		return {send: a, read: b, wrap: c};
+	});
+
+var _user$project$Components$actor = F3(
+	function (selection, text, enabled) {
+		return A2(
+			_elm_lang$html$Html$button,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					_user$project$Types$User(
+						_user$project$Types$Select(selection))),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$classList(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'actor', _1: true},
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$disabled(!enabled),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(text),
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$Components$selector = F3(
+	function (selection, text, selected) {
+		return A2(
+			_elm_lang$html$Html$button,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					_user$project$Types$User(
+						_user$project$Types$Select(selection))),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$classList(
+						{
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: 'selected', _1: selected},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'selector', _1: true},
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(text),
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$Components$options = F3(
+	function (parent, opts, selected) {
+		var is_selected = function (oid) {
+			var _p0 = selected;
+			if (_p0.ctor === 'Just') {
+				return _elm_lang$core$Native_Utils.eq(_p0._0, oid);
+			} else {
+				return false;
+			}
+		};
+		var mkSelector = function (opt) {
+			return A3(
+				_user$project$Components$selector,
+				{itm: parent, opt: opt.code},
+				opt.text,
+				is_selected(opt.code));
+		};
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$classList(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'options', _1: true},
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			},
+			A2(_elm_lang$core$List$map, mkSelector, opts));
+	});
+var _user$project$Components$question_text = function (text) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$classList(
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: 'question-text', _1: true},
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text(text),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$Components$question = F2(
+	function (spec, selected) {
+		var opts = A3(_user$project$Components$options, spec.code, spec.opts, selected);
+		var text = _user$project$Components$question_text(spec.text);
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$classList(
+					{
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: 'question', _1: true},
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: text,
+				_1: {
+					ctor: '::',
+					_0: opts,
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$Components$splash = function (text) {
 	return A2(
 		_elm_lang$html$Html$h2,
 		{
@@ -8998,25 +9407,114 @@ var _user$project$Interface$splash = function (text) {
 			_1: {ctor: '[]'}
 		});
 };
+
+var _user$project$Utilities$add_response = F2(
+	function (response, pgrm) {
+		var arch = A2(
+			_elm_lang$core$Basics_ops['++'],
+			pgrm.arch,
+			{
+				ctor: '::',
+				_0: response,
+				_1: {ctor: '[]'}
+			});
+		return _elm_lang$core$Native_Utils.update(
+			pgrm,
+			{arch: arch});
+	});
+var _user$project$Utilities$insert_selection = F2(
+	function (selection, pgrm) {
+		var sess = A3(_elm_lang$core$Dict$insert, selection.itm, selection, pgrm.sess);
+		return _elm_lang$core$Native_Utils.update(
+			pgrm,
+			{sess: sess});
+	});
+var _user$project$Utilities$is_filled = F2(
+	function (survey, session) {
+		var fltr = F2(
+			function (item, bool) {
+				return bool ? A2(_elm_lang$core$Dict$member, item.code, session) : false;
+			});
+		return A3(_elm_lang$core$List$foldr, fltr, true, survey.itms);
+	});
+var _user$project$Utilities$timestamp = function (closure) {
+	return A2(_elm_lang$core$Task$perform, closure, _elm_lang$core$Time$now);
+};
+var _user$project$Utilities$submit_session = function (pgrm) {
+	if (A2(_user$project$Utilities$is_filled, pgrm.spec, pgrm.sess)) {
+		var save = function (time) {
+			return _user$project$Types$Save(
+				{
+					time: _elm_lang$core$Basics$floor(
+						_elm_lang$core$Time$inSeconds(time)),
+					code: pgrm.spec.code,
+					sels: _elm_lang$core$Dict$values(pgrm.sess)
+				});
+		};
+		return _elm_lang$core$Result$Ok(
+			{
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Native_Utils.update(
+					pgrm,
+					{sess: _elm_lang$core$Dict$empty}),
+				_1: _user$project$Utilities$timestamp(save)
+			});
+	} else {
+		return _elm_lang$core$Result$Err(
+			{ctor: '_Tuple0'});
+	}
+};
+
+var _user$project$Interface$apply_input = F2(
+	function (pgrm, input) {
+		var _p0 = input;
+		if (_p0.ctor === 'Select') {
+			var updated = A2(_user$project$Utilities$insert_selection, _p0._0, pgrm);
+			return {ctor: '_Tuple2', _0: updated, _1: _elm_lang$core$Platform_Cmd$none};
+		} else {
+			var _p1 = function () {
+				var _p2 = _user$project$Utilities$submit_session(pgrm);
+				if (_p2.ctor === 'Ok') {
+					return {ctor: '_Tuple2', _0: _p2._0._0, _1: _p2._0._1};
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: A2(_elm_lang$core$Debug$log, 'invalid submit event', pgrm),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				}
+			}();
+			var updated = _p1._0;
+			var cmd = _p1._1;
+			return {ctor: '_Tuple2', _0: updated, _1: cmd};
+		}
+	});
 var _user$project$Interface$render_form = F2(
-	function (model, survey) {
-		return _user$project$Interface$splash('~form placeholder~');
+	function (conf, pgrm) {
+		return _user$project$Components$splash('~form placeholder~');
 	});
 var _user$project$Interface$render_kiosk = F2(
-	function (model, survey) {
-		return _user$project$Interface$splash('~kiosk placeholder~');
+	function (conf, pgrm) {
+		return _user$project$Components$splash('~kiosk placeholder~');
 	});
-var _user$project$Main$view = function (model) {
-	var _p0 = model.program;
-	switch (_p0.ctor) {
+
+var _user$project$Main$view = function (_p0) {
+	var _p1 = _p0;
+	var _p5 = _p1.conf;
+	var _p2 = _p1.pgrm;
+	switch (_p2.ctor) {
 		case 'Init':
-			return _user$project$Interface$splash('loading survey...');
-		case 'Kiosk':
-			return A2(_user$project$Interface$render_kiosk, model, _p0._0);
-		case 'Form':
-			return A2(_user$project$Interface$render_form, model, _p0._0);
+			return _user$project$Components$splash('loading...');
+		case 'Run':
+			var _p4 = _p2._0;
+			var _p3 = _p5.mode;
+			if (_p3.ctor === 'Kiosk') {
+				return A2(_user$project$Interface$render_kiosk, _p5, _p4);
+			} else {
+				return A2(_user$project$Interface$render_form, _p5, _p4);
+			}
 		default:
-			return _user$project$Interface$splash('process complete.');
+			return _user$project$Components$splash('Thank You!');
 	}
 };
 var _user$project$Main$subscriptions = function (model) {
@@ -9024,33 +9522,120 @@ var _user$project$Main$subscriptions = function (model) {
 };
 var _user$project$Main$update = F2(
 	function (msg, model) {
-		var _p1 = msg;
-		switch (_p1.ctor) {
-			case 'Set':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{program: _p1._0}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			case 'User':
-				return A2(_user$project$Interface$handle_input, model, _p1._0);
+		var _p6 = model.pgrm;
+		switch (_p6.ctor) {
+			case 'Init':
+				var _p7 = msg;
+				if (_p7.ctor === 'Recv') {
+					var pgrm = function () {
+						var _p8 = A2(_user$project$Comms$process_rsp, _elm_lang$core$Maybe$Nothing, _p7._0);
+						if (_p8.ctor === 'Just') {
+							return _user$project$Types$Run(_p8._0);
+						} else {
+							return _user$project$Types$Init;
+						}
+					}();
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{pgrm: pgrm}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				} else {
+					var _p9 = A2(_elm_lang$core$Debug$log, 'unexpected msg', msg);
+					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				}
+			case 'Run':
+				var _p13 = _p6._0;
+				var _p10 = msg;
+				switch (_p10.ctor) {
+					case 'Recv':
+						var updated = function () {
+							var _p11 = A2(
+								_user$project$Comms$process_rsp,
+								_elm_lang$core$Maybe$Just(_p13),
+								_p10._0);
+							if (_p11.ctor === 'Just') {
+								return _user$project$Types$Run(_p11._0);
+							} else {
+								return model.pgrm;
+							}
+						}();
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{pgrm: updated}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					case 'User':
+						var _p12 = A2(_user$project$Interface$apply_input, _p13, _p10._0);
+						var updated = _p12._0;
+						var cmd = _p12._1;
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									pgrm: _user$project$Types$Run(updated)
+								}),
+							_1: cmd
+						};
+					default:
+						var push = _user$project$Comms$push_archive(model.conf);
+						var updated = A2(_user$project$Utilities$add_response, _p10._0, _p13);
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									pgrm: _user$project$Types$Run(updated)
+								}),
+							_1: push(updated.arch)
+						};
+				}
 			default:
-				return A2(_user$project$Comms$handle_update, model, _p1._0);
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 		}
 	});
-var _user$project$Main$init = {
-	ctor: '_Tuple2',
-	_0: {
-		program: _user$project$Types$Init,
-		session: {ctor: '[]'},
-		archive: {ctor: '[]'}
-	},
-	_1: _user$project$Comms$load_survey
+var _user$project$Main$parse_flags = function (flags) {
+	var conf = A2(_user$project$Types$Config, flags.srvr, flags.tick);
+	return (_elm_lang$core$Native_Utils.cmp(flags.mode, 1) < 0) ? conf(_user$project$Types$Form) : conf(_user$project$Types$Kiosk);
 };
-var _user$project$Main$main = _elm_lang$html$Html$program(
-	{init: _user$project$Main$init, update: _user$project$Main$update, subscriptions: _user$project$Main$subscriptions, view: _user$project$Main$view})();
+var _user$project$Main$init = function (flags) {
+	var conf = _user$project$Main$parse_flags(flags);
+	var pgrm = _user$project$Types$Init;
+	return {
+		ctor: '_Tuple2',
+		_0: {pgrm: pgrm, conf: conf},
+		_1: _user$project$Comms$pull_survey(conf)
+	};
+};
+var _user$project$Main$main = _elm_lang$html$Html$programWithFlags(
+	{init: _user$project$Main$init, update: _user$project$Main$update, subscriptions: _user$project$Main$subscriptions, view: _user$project$Main$view})(
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (mode) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (srvr) {
+					return A2(
+						_elm_lang$core$Json_Decode$andThen,
+						function (tick) {
+							return _elm_lang$core$Json_Decode$succeed(
+								{mode: mode, srvr: srvr, tick: tick});
+						},
+						A2(_elm_lang$core$Json_Decode$field, 'tick', _elm_lang$core$Json_Decode$int));
+				},
+				A2(_elm_lang$core$Json_Decode$field, 'srvr', _elm_lang$core$Json_Decode$string));
+		},
+		A2(_elm_lang$core$Json_Decode$field, 'mode', _elm_lang$core$Json_Decode$int)));
+var _user$project$Main$Flags = F3(
+	function (a, b, c) {
+		return {srvr: a, tick: b, mode: c};
+	});
+
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};
 if (typeof _user$project$Main$main !== 'undefined') {
@@ -9086,4 +9671,4 @@ for (var publicModule in Elm)
 }
 
 }).call(this);
-</script></head><body><script type="text/javascript">Elm.Main.fullscreen()</script></body></html>
+

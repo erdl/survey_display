@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>survey</title>
+  </head>
+
+  <body>
+
+    <div id="survey-main"></div>
+
+    <script src="/static/survey-app.js"></script>
+
+    <script>
+      // get the node element to bind the survey app to. 
+      var node = document.getElementById('survey-main');
+      
+      // config value, inserted by Jinja.
+      var config = {{ config | tojson | safe  }};
+
+      // launch elm-app.
+      var app = Elm.Main.embed(node,config);
+    </script>
+
+    </body>
+
+</html>
+

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import src.core as core
 import flask
-from flask_cors import cross_origin
+# from flask_cors import cross_origin
 import src.utils.files as files
 
 app = flask.Flask(__name__)
@@ -16,23 +16,38 @@ def landing():
 
 # placeholder callback route.
 @app.route('/callback/<callback>', methods = ['GET','POST'])
-@cross_origin()
+# @cross_origin()
 def callback(callback):
     print('callback: ',callback)
-    return flask.Response(status=200)
-
-
-# basic survey route... assumes GETs are from users,
-# and POSTs are apps requesting survey specs...
-@app.route('/surveys/<survey>', methods = ['GET','POST'])
-def surveys(survey):
-    print('survey-request: ',survey)
-    # if we are talking to a normal user, just send `survey.html`.
     if flask.request.method == 'GET':
-        return flask.current_app.send_static_file('survey.html')
-    # if we are talking to an app, send the survey spec it wants.
+        return handle_spec_request(callback)
     else:
-        return handle_spec_request(survey)
+        return flask.Response(status=200)
+
+
+# user survey access route...
+@app.route('/surveys/<survey>', methods = ['GET'])
+def surveys(survey):
+    print('survey-request: ',survey) 
+    return survey_app(survey,'form')
+
+
+# building kiosk access route...
+@app.route('/kiosks/<survey>',methods=['GET'])
+def kiosks(survey):
+    return survey_app(survey,'kiosk')
+
+
+# survey app constructor.
+def survey_app(survey,mode):
+    # survey mode integer mapping.
+    codes = {'kiosk' : 1, 'form' : 0}
+    # application callback address.
+    server = '/callback/{}'.format(survey)
+    # config dict to be passed as flags to the elm-app.
+    config = {'srvr': server, 'tick': 20, 'mode': codes.get(mode,1)}
+    # return rendered template w/ config dict inserted.
+    return flask.render_template('survey.html',config=config)
 
 
 # handler for survey spec requests from apps.
