@@ -15,14 +15,17 @@ def landing():
 
 
 # placeholder callback route.
-@app.route('/callback/<callback>', methods = ['GET','POST'])
+@app.route('/callback/<survey>', methods = ['GET','POST'])
 # @cross_origin()
-def callback(callback):
-    print('callback: ',callback)
+def callback(survey):
+    print('callback: ',survey)
     if flask.request.method == 'GET':
-        return handle_spec_request(callback)
+        return handle_spec_request(survey)
     else:
-        return flask.Response(status=200)
+        data = flask.request.json
+        print('data: ',data)
+        core.save_responses(survey,data)
+        return flask.jsonify({})
 
 
 # user survey access route...

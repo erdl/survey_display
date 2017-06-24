@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import toml
 import json
+import csv
 import os
 import os.path as path
 
@@ -36,7 +37,7 @@ def load_survey(name):
 def save_responses(survey,responses):
     if not responses: return
     uri = 'tmp/responses/'
-    header = rsp[0]._fields
+    header = responses[0]._fields
     write_csv(uri,survey,header,responses)
 
 

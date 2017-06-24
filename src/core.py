@@ -16,8 +16,9 @@ def load_survey(name):
     return spec
 
 # save a given response.
-def save_responses(survey,rspdict):
+def save_responses(survey,rsplist):
     responses = []
-    for rsp in rspdict:
-        responses.append(data.convert_response(rsp))
-    files.save_response(survey,responses)
+    for rsp in rsplist:
+        responses += data.convert_response(rsp)
+    files.save_responses(survey,responses)
+

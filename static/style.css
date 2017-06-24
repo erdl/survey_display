@@ -30,11 +30,11 @@ button:disabled {
   background-color: #38908A;
 }
 
-.query {
+.question {
   padding: 40px;
 }
 
-.query-txt {
+.question-text {
   padding: 8px;
 }
 

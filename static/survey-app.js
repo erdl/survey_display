@@ -9033,9 +9033,9 @@ var _elm_lang$http$Http$StringPart = F2(
 	});
 var _elm_lang$http$Http$stringPart = _elm_lang$http$Http$StringPart;
 
-var _user$project$Types$Model = F2(
-	function (a, b) {
-		return {pgrm: a, conf: b};
+var _user$project$Types$Model = F3(
+	function (a, b, c) {
+		return {pgrm: a, conf: b, page: c};
 	});
 var _user$project$Types$Config = F3(
 	function (a, b, c) {
@@ -9065,6 +9065,10 @@ var _user$project$Types$Response = F3(
 	function (a, b, c) {
 		return {time: a, code: b, sels: c};
 	});
+var _user$project$Types$Splash = function (a) {
+	return {ctor: 'Splash', _0: a};
+};
+var _user$project$Types$Main = {ctor: 'Main'};
 var _user$project$Types$Form = {ctor: 'Form'};
 var _user$project$Types$Kiosk = {ctor: 'Kiosk'};
 var _user$project$Types$Fin = {ctor: 'Fin'};
@@ -9243,7 +9247,8 @@ var _user$project$Comms$push_archive = F2(
 	function (config, arch) {
 		var comm = {
 			send: config.srvr,
-			read: _elm_lang$core$Json_Decode$string,
+			read: _elm_lang$core$Json_Decode$succeed(
+				{ctor: '_Tuple0'}),
 			wrap: function (rslt) {
 				return _user$project$Types$Recv(
 					_user$project$Types$Upload(rslt));
@@ -9257,36 +9262,6 @@ var _user$project$Comms$Comm = F3(
 		return {send: a, read: b, wrap: c};
 	});
 
-var _user$project$Components$actor = F3(
-	function (selection, text, enabled) {
-		return A2(
-			_elm_lang$html$Html$button,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Events$onClick(
-					_user$project$Types$User(
-						_user$project$Types$Select(selection))),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$classList(
-						{
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'actor', _1: true},
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$disabled(!enabled),
-						_1: {ctor: '[]'}
-					}
-				}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text(text),
-				_1: {ctor: '[]'}
-			});
-	});
 var _user$project$Components$selector = F3(
 	function (selection, text, selected) {
 		return A2(
@@ -9317,12 +9292,60 @@ var _user$project$Components$selector = F3(
 				_1: {ctor: '[]'}
 			});
 	});
+var _user$project$Components$actor = F3(
+	function (_p0, input, active) {
+		var _p1 = _p0;
+		return A2(
+			_elm_lang$html$Html$button,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Events$onClick(
+					_user$project$Types$User(input)),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class(_p1._0),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$disabled(!active),
+						_1: {ctor: '[]'}
+					}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(_p1._1),
+				_1: {ctor: '[]'}
+			});
+	});
+var _user$project$Components$submit = function (active) {
+	return A2(
+		_elm_lang$html$Html$button,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Events$onClick(
+				_user$project$Types$User(_user$project$Types$Submit)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('submit-button'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$disabled(!active),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text('submit'),
+			_1: {ctor: '[]'}
+		});
+};
 var _user$project$Components$options = F3(
 	function (parent, opts, selected) {
 		var is_selected = function (oid) {
-			var _p0 = selected;
-			if (_p0.ctor === 'Just') {
-				return _elm_lang$core$Native_Utils.eq(_p0._0, oid);
+			var _p2 = selected;
+			if (_p2.ctor === 'Just') {
+				return _elm_lang$core$Native_Utils.eq(_p2._0, oid);
 			} else {
 				return false;
 			}
@@ -9350,7 +9373,7 @@ var _user$project$Components$options = F3(
 	});
 var _user$project$Components$question_text = function (text) {
 	return A2(
-		_elm_lang$html$Html$div,
+		_elm_lang$html$Html$h2,
 		{
 			ctor: '::',
 			_0: _elm_lang$html$Html_Attributes$classList(
@@ -9465,7 +9488,7 @@ var _user$project$Utilities$submit_session = function (pgrm) {
 	}
 };
 
-var _user$project$Interface$apply_input = F2(
+var _user$project$Interface$form_input = F2(
 	function (pgrm, input) {
 		var _p0 = input;
 		if (_p0.ctor === 'Select') {
@@ -9489,29 +9512,94 @@ var _user$project$Interface$apply_input = F2(
 			return {ctor: '_Tuple2', _0: updated, _1: cmd};
 		}
 	});
-var _user$project$Interface$render_form = F2(
-	function (conf, pgrm) {
-		return _user$project$Components$splash('~form placeholder~');
+var _user$project$Interface$form_questions = F2(
+	function (session, questions) {
+		var generate = function (spec) {
+			return A2(
+				_user$project$Components$question,
+				spec,
+				function () {
+					var _p3 = A2(_elm_lang$core$Dict$get, spec.code, session);
+					if (_p3.ctor === 'Just') {
+						return _elm_lang$core$Maybe$Just(_p3._0.opt);
+					} else {
+						return _elm_lang$core$Maybe$Nothing;
+					}
+				}());
+		};
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('form-questions'),
+				_1: {ctor: '[]'}
+			},
+			A2(_elm_lang$core$List$map, generate, questions));
 	});
-var _user$project$Interface$render_kiosk = F2(
-	function (conf, pgrm) {
-		return _user$project$Components$splash('~kiosk placeholder~');
-	});
+var _user$project$Interface$render_form = function (_p4) {
+	var _p5 = _p4;
+	var _p7 = _p5.spec;
+	var _p6 = _p5.sess;
+	var sub = _user$project$Components$submit(
+		A2(_user$project$Utilities$is_filled, _p7, _p6));
+	var questions = A2(_user$project$Interface$form_questions, _p6, _p7.itms);
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('form'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: questions,
+			_1: {
+				ctor: '::',
+				_0: sub,
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$Interface$render_kiosk = function (_p8) {
+	var _p9 = _p8;
+	var _p10 = _elm_lang$core$List$head(_p9.spec.itms);
+	if (_p10.ctor === 'Just') {
+		var question = A2(_user$project$Components$question, _p10._0, _elm_lang$core$Maybe$Nothing);
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('kiosk'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: question,
+				_1: {ctor: '[]'}
+			});
+	} else {
+		return _user$project$Components$splash('no questions available at this time');
+	}
+};
 
 var _user$project$Main$view = function (_p0) {
 	var _p1 = _p0;
-	var _p5 = _p1.conf;
 	var _p2 = _p1.pgrm;
 	switch (_p2.ctor) {
 		case 'Init':
 			return _user$project$Components$splash('loading...');
 		case 'Run':
-			var _p4 = _p2._0;
-			var _p3 = _p5.mode;
-			if (_p3.ctor === 'Kiosk') {
-				return A2(_user$project$Interface$render_kiosk, _p5, _p4);
+			var _p5 = _p2._0;
+			var _p3 = _p1.page;
+			if (_p3.ctor === 'Main') {
+				var _p4 = _p1.conf.mode;
+				if (_p4.ctor === 'Kiosk') {
+					return _user$project$Interface$render_kiosk(_p5);
+				} else {
+					return _user$project$Interface$render_form(_p5);
+				}
 			} else {
-				return A2(_user$project$Interface$render_form, _p5, _p4);
+				return _user$project$Components$splash(_p3._0);
 			}
 		default:
 			return _user$project$Components$splash('Thank You!');
@@ -9547,14 +9635,14 @@ var _user$project$Main$update = F2(
 					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 				}
 			case 'Run':
-				var _p13 = _p6._0;
+				var _p14 = _p6._0;
 				var _p10 = msg;
 				switch (_p10.ctor) {
 					case 'Recv':
 						var updated = function () {
 							var _p11 = A2(
 								_user$project$Comms$process_rsp,
-								_elm_lang$core$Maybe$Just(_p13),
+								_elm_lang$core$Maybe$Just(_p14),
 								_p10._0);
 							if (_p11.ctor === 'Just') {
 								return _user$project$Types$Run(_p11._0);
@@ -9570,7 +9658,14 @@ var _user$project$Main$update = F2(
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'User':
-						var _p12 = A2(_user$project$Interface$apply_input, _p13, _p10._0);
+						var _p12 = function () {
+							var _p13 = model.conf.mode;
+							if (_p13.ctor === 'Form') {
+								return A2(_user$project$Interface$form_input, _p14, _p10._0);
+							} else {
+								return {ctor: '_Tuple2', _0: _p14, _1: _elm_lang$core$Platform_Cmd$none};
+							}
+						}();
 						var updated = _p12._0;
 						var cmd = _p12._1;
 						return {
@@ -9584,7 +9679,7 @@ var _user$project$Main$update = F2(
 						};
 					default:
 						var push = _user$project$Comms$push_archive(model.conf);
-						var updated = A2(_user$project$Utilities$add_response, _p10._0, _p13);
+						var updated = A2(_user$project$Utilities$add_response, _p10._0, _p14);
 						return {
 							ctor: '_Tuple2',
 							_0: _elm_lang$core$Native_Utils.update(
@@ -9608,7 +9703,7 @@ var _user$project$Main$init = function (flags) {
 	var pgrm = _user$project$Types$Init;
 	return {
 		ctor: '_Tuple2',
-		_0: {pgrm: pgrm, conf: conf},
+		_0: {pgrm: pgrm, conf: conf, page: _user$project$Types$Main},
 		_1: _user$project$Comms$pull_survey(conf)
 	};
 };

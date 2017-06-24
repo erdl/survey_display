@@ -4,13 +4,24 @@ from collections import namedtuple
 
 Response = namedtuple('rsp',['survey','question','option','timestamp'])
 
-# naievely convert a response dict to response tuple.
+# response format returned by survey-app:
+# { time = 123
+# , code = 456
+# , sels = [ { itm = 123, opt = 456 }, ... ]
+# }
+
+
+# convert a response dict into a set or rows, with
+# each row fully describing a single given answer.
 def convert_response(rsp):
-    fields = Response._fields
-    raw = []
-    for field in fields:
-        raw.append(rsp[field])
-    return Response(*raw)
+    time = rsp['time']
+    code = rsp['code']
+    sels = rsp['sels']
+    mkrsp = lambda s: Response(code,s['itm'],s['opt'],time)
+    responses = []
+    for selection in sels:
+        responses.append(mkrsp(selection))
+    return responses
 
 
 # generate a survey spec from a survey name & config.
@@ -30,3 +41,5 @@ def make_survey_spec(name,config):
             ispec['opts'].append(ospec)
         survey['itms'].append(ispec)
     return survey
+
+
