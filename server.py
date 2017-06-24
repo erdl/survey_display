@@ -63,3 +63,7 @@ def handle_spec_request(survey):
     else:
         print('cannot find survey: ',survey)
         return flask.Response(status=400)
+
+
+if __name__ == '__main__':
+    app.run()
