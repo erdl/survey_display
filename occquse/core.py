@@ -2,6 +2,7 @@
 from .utils import files
 from .utils import psql
 from .utils import data
+from . import appconf
 import flask
 
 
@@ -34,8 +35,13 @@ def survey_app(survey,mode):
     server = '/callback/{}'.format(survey)
     # config dict to be passed as flags to the elm-app.
     config = {'srvr': server, 'tick': 20, 'mode': codes.get(mode,1)}
+    # apply the application alias to all urls if it exists.
+    if 'alias' in appconf:
+        prefix = '/' + appconf['alias'].replace('/','')
+        config['srvr'] = prefix + server
+    else: prefix = ''
     # return rendered template w/ config dict inserted.
-    return flask.render_template('survey.html',config=config)
+    return flask.render_template('survey.html',config=config,prefix=prefix)
 
 
 # handler for survey spec requests from apps.
