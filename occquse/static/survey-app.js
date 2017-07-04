@@ -9086,6 +9086,9 @@ var _user$project$Types$Upload = function (a) {
 var _user$project$Types$Update = function (a) {
 	return {ctor: 'Update', _0: a};
 };
+var _user$project$Types$Set = function (a) {
+	return {ctor: 'Set', _0: a};
+};
 var _user$project$Types$Save = function (a) {
 	return {ctor: 'Save', _0: a};
 };
@@ -9463,8 +9466,8 @@ var _user$project$Utilities$is_filled = F2(
 var _user$project$Utilities$timestamp = function (closure) {
 	return A2(_elm_lang$core$Task$perform, closure, _elm_lang$core$Time$now);
 };
-var _user$project$Utilities$submit_session = function (pgrm) {
-	if (A2(_user$project$Utilities$is_filled, pgrm.spec, pgrm.sess)) {
+var _user$project$Utilities$submit_session = F2(
+	function (pgrm, mode) {
 		var save = function (time) {
 			return _user$project$Types$Save(
 				{
@@ -9474,31 +9477,60 @@ var _user$project$Utilities$submit_session = function (pgrm) {
 					sels: _elm_lang$core$Dict$values(pgrm.sess)
 				});
 		};
-		return _elm_lang$core$Result$Ok(
-			{
-				ctor: '_Tuple2',
-				_0: _elm_lang$core$Native_Utils.update(
-					pgrm,
-					{sess: _elm_lang$core$Dict$empty}),
-				_1: _user$project$Utilities$timestamp(save)
-			});
-	} else {
-		return _elm_lang$core$Result$Err(
-			{ctor: '_Tuple0'});
-	}
-};
+		var _p0 = mode;
+		if (_p0.ctor === 'Form') {
+			return A2(_user$project$Utilities$is_filled, pgrm.spec, pgrm.sess) ? _elm_lang$core$Result$Ok(
+				{
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						pgrm,
+						{sess: _elm_lang$core$Dict$empty}),
+					_1: _user$project$Utilities$timestamp(save)
+				}) : _elm_lang$core$Result$Err(
+				{ctor: '_Tuple0'});
+		} else {
+			return _elm_lang$core$Result$Ok(
+				{
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						pgrm,
+						{sess: _elm_lang$core$Dict$empty}),
+					_1: _user$project$Utilities$timestamp(save)
+				});
+		}
+	});
 
-var _user$project$Interface$form_input = F2(
+var _user$project$Interface$kiosk_input = F2(
 	function (pgrm, input) {
 		var _p0 = input;
 		if (_p0.ctor === 'Select') {
 			var updated = A2(_user$project$Utilities$insert_selection, _p0._0, pgrm);
+			var _p1 = A2(_user$project$Utilities$submit_session, updated, _user$project$Types$Kiosk);
+			if (_p1.ctor === 'Ok') {
+				return {ctor: '_Tuple2', _0: _p1._0._0, _1: _p1._0._1};
+			} else {
+				return {
+					ctor: '_Tuple2',
+					_0: A2(_elm_lang$core$Debug$log, 'invalid submit event', pgrm),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			}
+		} else {
+			var _p2 = A2(_elm_lang$core$Debug$log, 'unexpected `Submit` event during kiosk mode', pgrm);
+			return {ctor: '_Tuple2', _0: pgrm, _1: _elm_lang$core$Platform_Cmd$none};
+		}
+	});
+var _user$project$Interface$form_input = F2(
+	function (pgrm, input) {
+		var _p3 = input;
+		if (_p3.ctor === 'Select') {
+			var updated = A2(_user$project$Utilities$insert_selection, _p3._0, pgrm);
 			return {ctor: '_Tuple2', _0: updated, _1: _elm_lang$core$Platform_Cmd$none};
 		} else {
-			var _p1 = function () {
-				var _p2 = _user$project$Utilities$submit_session(pgrm);
-				if (_p2.ctor === 'Ok') {
-					return {ctor: '_Tuple2', _0: _p2._0._0, _1: _p2._0._1};
+			var _p4 = function () {
+				var _p5 = A2(_user$project$Utilities$submit_session, pgrm, _user$project$Types$Form);
+				if (_p5.ctor === 'Ok') {
+					return {ctor: '_Tuple2', _0: _p5._0._0, _1: _p5._0._1};
 				} else {
 					return {
 						ctor: '_Tuple2',
@@ -9507,8 +9539,8 @@ var _user$project$Interface$form_input = F2(
 					};
 				}
 			}();
-			var updated = _p1._0;
-			var cmd = _p1._1;
+			var updated = _p4._0;
+			var cmd = _p4._1;
 			return {ctor: '_Tuple2', _0: updated, _1: cmd};
 		}
 	});
@@ -9519,9 +9551,9 @@ var _user$project$Interface$form_questions = F2(
 				_user$project$Components$question,
 				spec,
 				function () {
-					var _p3 = A2(_elm_lang$core$Dict$get, spec.code, session);
-					if (_p3.ctor === 'Just') {
-						return _elm_lang$core$Maybe$Just(_p3._0.opt);
+					var _p6 = A2(_elm_lang$core$Dict$get, spec.code, session);
+					if (_p6.ctor === 'Just') {
+						return _elm_lang$core$Maybe$Just(_p6._0.opt);
 					} else {
 						return _elm_lang$core$Maybe$Nothing;
 					}
@@ -9536,13 +9568,13 @@ var _user$project$Interface$form_questions = F2(
 			},
 			A2(_elm_lang$core$List$map, generate, questions));
 	});
-var _user$project$Interface$render_form = function (_p4) {
-	var _p5 = _p4;
-	var _p7 = _p5.spec;
-	var _p6 = _p5.sess;
+var _user$project$Interface$render_form = function (_p7) {
+	var _p8 = _p7;
+	var _p10 = _p8.spec;
+	var _p9 = _p8.sess;
 	var sub = _user$project$Components$submit(
-		A2(_user$project$Utilities$is_filled, _p7, _p6));
-	var questions = A2(_user$project$Interface$form_questions, _p6, _p7.itms);
+		A2(_user$project$Utilities$is_filled, _p10, _p9));
+	var questions = A2(_user$project$Interface$form_questions, _p9, _p10.itms);
 	return A2(
 		_elm_lang$html$Html$div,
 		{
@@ -9560,11 +9592,11 @@ var _user$project$Interface$render_form = function (_p4) {
 			}
 		});
 };
-var _user$project$Interface$render_kiosk = function (_p8) {
-	var _p9 = _p8;
-	var _p10 = _elm_lang$core$List$head(_p9.spec.itms);
-	if (_p10.ctor === 'Just') {
-		var question = A2(_user$project$Components$question, _p10._0, _elm_lang$core$Maybe$Nothing);
+var _user$project$Interface$render_kiosk = function (_p11) {
+	var _p12 = _p11;
+	var _p13 = _elm_lang$core$List$head(_p12.spec.itms);
+	if (_p13.ctor === 'Just') {
+		var question = A2(_user$project$Components$question, _p13._0, _elm_lang$core$Maybe$Nothing);
 		return A2(
 			_elm_lang$html$Html$div,
 			{
@@ -9606,19 +9638,39 @@ var _user$project$Main$view = function (_p0) {
 	}
 };
 var _user$project$Main$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$none;
+	var _p6 = model.conf.mode;
+	if (_p6.ctor === 'Kiosk') {
+		var _p7 = model.pgrm;
+		if (_p7.ctor === 'Run') {
+			var _p8 = model.page;
+			if (_p8.ctor === 'Splash') {
+				return A2(
+					_elm_lang$core$Time$every,
+					3 * _elm_lang$core$Time$second,
+					function (_p9) {
+						return _user$project$Types$Set(_user$project$Types$Main);
+					});
+			} else {
+				return _elm_lang$core$Platform_Sub$none;
+			}
+		} else {
+			return _elm_lang$core$Platform_Sub$none;
+		}
+	} else {
+		return _elm_lang$core$Platform_Sub$none;
+	}
 };
 var _user$project$Main$update = F2(
 	function (msg, model) {
-		var _p6 = model.pgrm;
-		switch (_p6.ctor) {
+		var _p10 = model.pgrm;
+		switch (_p10.ctor) {
 			case 'Init':
-				var _p7 = msg;
-				if (_p7.ctor === 'Recv') {
+				var _p11 = msg;
+				if (_p11.ctor === 'Recv') {
 					var pgrm = function () {
-						var _p8 = A2(_user$project$Comms$process_rsp, _elm_lang$core$Maybe$Nothing, _p7._0);
-						if (_p8.ctor === 'Just') {
-							return _user$project$Types$Run(_p8._0);
+						var _p12 = A2(_user$project$Comms$process_rsp, _elm_lang$core$Maybe$Nothing, _p11._0);
+						if (_p12.ctor === 'Just') {
+							return _user$project$Types$Run(_p12._0);
 						} else {
 							return _user$project$Types$Init;
 						}
@@ -9631,21 +9683,21 @@ var _user$project$Main$update = F2(
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				} else {
-					var _p9 = A2(_elm_lang$core$Debug$log, 'unexpected msg', msg);
+					var _p13 = A2(_elm_lang$core$Debug$log, 'unexpected msg', msg);
 					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 				}
 			case 'Run':
-				var _p14 = _p6._0;
-				var _p10 = msg;
-				switch (_p10.ctor) {
+				var _p19 = _p10._0;
+				var _p14 = msg;
+				switch (_p14.ctor) {
 					case 'Recv':
 						var updated = function () {
-							var _p11 = A2(
+							var _p15 = A2(
 								_user$project$Comms$process_rsp,
-								_elm_lang$core$Maybe$Just(_p14),
-								_p10._0);
-							if (_p11.ctor === 'Just') {
-								return _user$project$Types$Run(_p11._0);
+								_elm_lang$core$Maybe$Just(_p19),
+								_p14._0);
+							if (_p15.ctor === 'Just') {
+								return _user$project$Types$Run(_p15._0);
 							} else {
 								return model.pgrm;
 							}
@@ -9658,16 +9710,17 @@ var _user$project$Main$update = F2(
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'User':
-						var _p12 = function () {
-							var _p13 = model.conf.mode;
-							if (_p13.ctor === 'Form') {
-								return A2(_user$project$Interface$form_input, _p14, _p10._0);
+						var _p18 = _p14._0;
+						var _p16 = function () {
+							var _p17 = model.conf.mode;
+							if (_p17.ctor === 'Form') {
+								return A2(_user$project$Interface$form_input, _p19, _p18);
 							} else {
-								return {ctor: '_Tuple2', _0: _p14, _1: _elm_lang$core$Platform_Cmd$none};
+								return A2(_user$project$Interface$kiosk_input, _p19, _p18);
 							}
 						}();
-						var updated = _p12._0;
-						var cmd = _p12._1;
+						var updated = _p16._0;
+						var cmd = _p16._1;
 						return {
 							ctor: '_Tuple2',
 							_0: _elm_lang$core$Native_Utils.update(
@@ -9677,17 +9730,26 @@ var _user$project$Main$update = F2(
 								}),
 							_1: cmd
 						};
-					default:
+					case 'Save':
 						var push = _user$project$Comms$push_archive(model.conf);
-						var updated = A2(_user$project$Utilities$add_response, _p10._0, _p14);
+						var updated = A2(_user$project$Utilities$add_response, _p14._0, _p19);
 						return {
 							ctor: '_Tuple2',
 							_0: _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									pgrm: _user$project$Types$Run(updated)
+									pgrm: _user$project$Types$Run(updated),
+									page: _user$project$Types$Splash('Thank You!')
 								}),
 							_1: push(updated.arch)
+						};
+					default:
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{page: _p14._0}),
+							_1: _elm_lang$core$Platform_Cmd$none
 						};
 				}
 			default:
