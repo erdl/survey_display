@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 import psycopg2 as psql
 from . import files as futils
+from .. import appconf
+
+CONFIG = appconf.get('psql',{})
 
 # This is the primary `inner-join` used to collect the goods.
 CMD = """
@@ -39,11 +42,11 @@ FIELDS = ["url","survey-id","question-id","question-ord","question-txt","option-
 
 # load all currently active deployments.
 def load_active():
-    config = load_config('psql')
-    db = config['settings']['database']
-    raw = execute(db,CMD)
+    if not 'database' in CONFIG: return {}
+    raw = execute(CONFIG['database'],CMD)
     active = parse_active(raw)
     return active
+
 
 # construct a series of deployment objects
 # based upon a set of raw SQL rows.

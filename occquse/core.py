@@ -46,13 +46,30 @@ def survey_app(survey,mode):
 
 # handler for survey spec requests from apps.
 def handle_spec_request(survey):
+    static_spec = spec_request_static(survey)
+    if static_spec:
+        return static_spec
+    psql_spec = spec_request_psql(survey)
+    if psql_spec:
+        return psql_spec
+    return flask.Response(status=400)
+
+
+# handle a static file spec requrest.
+def spec_request_static(survey):
     # if survey exists, load & return its spec.
     if survey_exists(survey):
         spec = load_survey(survey)
         return flask.jsonify(spec)
     # if survey did not exist, send back `400`.
-    else:
-        print('cannot find survey: ',survey)
-        return flask.Response(status=400)
+    else: return None
+
+
+# handle a database spec request.
+def spec_request_psql(survey):
+    active = psql.load_active()
+    if survey in active:
+        return flask.jsonify(active[survey])
+    else: return None
 
 
