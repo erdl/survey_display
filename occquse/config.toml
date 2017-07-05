@@ -1,6 +1,5 @@
 var-path = '../tmp'
 # alias = 'occquse'
-psql = false
 
 [psql]
 database = "kiosk"
