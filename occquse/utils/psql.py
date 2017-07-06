@@ -59,30 +59,35 @@ def parse_active(rows):
         url = row['url']
         # extract the survey for the given url, or supply
         # a new survey object if none yet exists.
-        survey = mapping.get(url,{'id':row['survey-id'],'questions':[]})
+        survey = mapping.get(url,{'code':row['survey-id'],'itms':[]})
         # filter `questions` to see if corresponding question object exists.
-        fltr = lambda q: q['id'] == row['question-id']
-        match = [(i,q) for i,q in enumerate(survey['questions']) if fltr(q)]
+        fltr = lambda q: q['code'] == row['question-id']
+        match = [(i,q) for i,q in enumerate(survey['itms']) if fltr(q)]
         assert len(match) <= 1
         # get question object & index, or initialize a new question object.
         index,question = match.pop() if match else (None,init_question(row))
         # add the new option object to the `options` field.
-        option = {'id':row['option-id'],'txt':row['option-txt']}
-        question['options'].append(option)
+        option = {'code':row['option-id'],'text':row['option-txt']}
+        question['opts'].append(option)
         # insert or append the question object as appropriate.
         if isinstance(index,int):
-            survey['questions'][index] = question
-        else: survey['questions'].append(question)
+            survey['itms'][index] = question
+        else: survey['itms'].append(question)
         # overwrite/add the survey object to the `mapping`.
         mapping[url] = survey
+    for name,survey in mapping.items():
+        survey['text'] = name
+        survey['itms'] = sorted(survey['itms'],key = lambda itm: itm['ord'])
+        for itm in survey['itms']:
+            _ = itm.pop('ord')
     return mapping
 
 # initialize a new question object from
 # a given dictionary of values.
 def init_question(spec):
-    question = { 'options': [] }
-    question['id'] = spec['question-id']
-    question['txt'] = spec['question-txt']
+    question = { 'opts': [] }
+    question['code'] = spec['question-id']
+    question['text'] = spec['question-txt']
     question['ord'] = spec['question-ord']
     return question
 
