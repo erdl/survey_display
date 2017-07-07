@@ -1,5 +1,5 @@
 var-path = '/var/www/www-data/occquse/'
-alias = 'occquse'
+alias = 'surveys'
 
 [psql]
 database = "kiosk"

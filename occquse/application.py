@@ -9,8 +9,7 @@ app = flask.Flask(__name__)
 # placeholder landing page.
 @app.route('/')
 def landing():
-    return 'hello world!'
-
+    return '-- csbcd survey app :: default page --'
 
 # placeholder callback route.
 @app.route('/callback/<survey>', methods = ['GET','POST'])
@@ -26,15 +25,9 @@ def callback(survey):
 
 
 # user survey access route...
-@app.route('/surveys/<survey>', methods = ['GET'])
+@app.route('/<survey>', methods = ['GET'])
 def surveys(survey):
     print('survey-request: ',survey) 
-    return core.survey_app(survey,'form')
-
-
-# building kiosk access route...
-@app.route('/kiosks/<survey>',methods=['GET'])
-def kiosks(survey):
     return core.survey_app(survey,'kiosk')
 
 
