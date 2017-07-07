@@ -46,9 +46,9 @@ def survey_app(survey,mode):
 
 # handler for survey spec requests from apps.
 def handle_spec_request(survey):
-    static_spec = spec_request_static(survey)
-    if static_spec:
-        return static_spec
+    #static_spec = spec_request_static(survey)
+    #if static_spec:
+    #    return static_spec
     psql_spec = spec_request_psql(survey)
     if psql_spec:
         return psql_spec

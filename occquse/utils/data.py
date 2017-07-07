@@ -2,7 +2,7 @@
 from collections import namedtuple
 
 
-Response = namedtuple('rsp',['survey','question','option','timestamp'])
+Response = namedtuple('rsp',['url','survey','question','option','timestamp'])
 
 # response format returned by survey-app:
 # { time = 123
@@ -15,9 +15,10 @@ Response = namedtuple('rsp',['survey','question','option','timestamp'])
 # each row fully describing a single given answer.
 def convert_response(rsp):
     time = rsp['time']
-    code = rsp['code']
+    suid = rsp['suid']
+    uuid = rsp['uuid']
     sels = rsp['sels']
-    mkrsp = lambda s: Response(code,s['itm'],s['opt'],time)
+    mkrsp = lambda s: Response(uuid,suid,s['itm'],s['opt'],time)
     responses = []
     for selection in sels:
         responses.append(mkrsp(selection))
