@@ -1,10 +1,9 @@
 var-path = '../tmp/'
-# var-path = '/var/www/www-data/occquse/'
-# alias = 'occquse'
+# alias = 'some-alias'
 
 #[psql]
-#database = "kiosk"
-#password = "3n3rgy"
+#database = "db"
+#password = "pass"
 #host = "127.0.0.1"
-#user = "webuser"
+#user = "some-user"
 
