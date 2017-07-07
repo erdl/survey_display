@@ -44,7 +44,7 @@ FIELDS = ["url","survey-id","question-id","question-ord","question-txt","option-
 # load all currently active deployments.
 def load_active():
     if not 'database' in CONFIG: return {}
-    raw = execute(CONFIG['database'],CMD)
+    raw = execute(CMD)
     active = parse_active(raw)
     return active
 
@@ -87,46 +87,6 @@ def parse_active(rows):
         spec['survey'] = survey
     return mapping
 
-# construct a series of deployment objects
-# based upon a set of raw SQL rows.
-def parse_active_old(rows):
-    mapping = {}
-    for row in rows:
-        # convert row to dict using the FIELDS variable to
-        # match field names to their given indexes.
-        row = {k: row[i] for i,k in enumerate(FIELDS)}
-        url = row['url']
-        # extract the survey for the given url, or supply
-        # a new survey object if none yet exists.
-        survey = mapping.get(url,{'code':row['survey-id'],'itms':[],
-            'kiosk':bool(row['is-kiosk']), 'url-id':int(row['url-id'])})
-        # filter `questions` to see if corresponding question object exists.
-        fltr = lambda q: q['code'] == row['question-id']
-        match = [(i,q) for i,q in enumerate(survey['itms']) if fltr(q)]
-        assert len(match) <= 1
-        # get question object & index, or initialize a new question object.
-        index,question = match.pop() if match else (None,init_question(row))
-        # add the new option object to the `options` field.
-        option = {'code':row['option-id'],'text':row['option-txt']}
-        question['opts'].append(option)
-        # insert or append the question object as appropriate.
-        if isinstance(index,int):
-            survey['itms'][index] = question
-        else: survey['itms'].append(question)
-        # overwrite/add the survey object to the `mapping`.
-
-        mapping[url] = survey
-    for name,spec in mapping.items():
-        survey = spec['survey']
-        survey['text'] = name
-        survey['itms'] = sorted(survey['itms'],key = lambda itm: itm['ord'])
-        for itm in survey['itms']:
-            _ = itm.pop('ord')
-        spec['survey'] = survey
-    return mapping
-
-
-
 # initialize a new question object from
 # a given dictionary of values.
 def init_question(spec):
@@ -137,8 +97,12 @@ def init_question(spec):
     return question
 
 # execute a given psql command & return results.
-def execute(db,cmd):
-    con = psql.connect(database=db)
+def execute(cmd):
+    if not "database" in CONFIG:
+        raise Exception("no value for `database` in `psql` configuration!")
+    keys = ("user","host","password","database")
+    conf = { key : CONFIG[key] for key in keys if key in CONFIG }
+    con = psql.connect(**conf)
     cur = con.cursor()
     cur.execute(cmd)
     data = cur.fetchall()
