@@ -23,9 +23,11 @@ CMD = """
     INNER JOIN "public".question ON "public".survey_question.question_id = "public".question.question_id
     INNER JOIN "public"."option" ON "public"."option".question_id = "public".question.question_id
     INNER JOIN "public".deployed_url ON "public".kiosk_survey.deployed_url_id = "public".deployed_url.deployed_url_id
+    ORDER BY
+    "public"."option"."response_position"
     """
 # the field layout returned by the above `inner-join`.
-FIELDS = ["url","survey-id","question-id","question-ord","question-txt","option-id","option-txt","url-id","is-kiosk"]
+FIELDS = ["url","survey-id","question-id","question-ord","question-txt","option-id","option-txt", "url-id","is-kiosk"]
 
 
 # deployment model:
