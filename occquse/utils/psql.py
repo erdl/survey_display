@@ -16,7 +16,8 @@ CMD = """
     "public"."option".option_id,
     "public"."option"."text",
     "public".kiosk_survey.deployed_url_id,
-    "public".deployed_url.is_kioski
+    "public".deployed_url.is_kioski,
+    "public"."option"."option_color"
     FROM
     "public".kiosk_survey
     INNER JOIN "public".survey_question ON "public".kiosk_survey.survey_info_id = "public".survey_question.survey_info_id
@@ -27,7 +28,7 @@ CMD = """
     "public"."option"."response_position"
     """
 # the field layout returned by the above `inner-join`.
-FIELDS = ["url","survey-id","question-id","question-ord","question-txt","option-id","option-txt", "url-id","is-kiosk"]
+FIELDS = ["url","survey-id","question-id","question-ord","question-txt","option-id","option-txt", "url-id","is-kiosk", "option_color"]
 
 
 # deployment model:
@@ -71,7 +72,7 @@ def parse_active(rows):
         # get question object & index, or initialize a new question object.
         index,question = match.pop() if match else (None,init_question(row))
         # add the new option object to the `options` field.
-        option = {'code':row['option-id'],'text':row['option-txt']}
+        option = {'code':row['option-id'],'text':row['option-txt'], 'option_color':row['option_color']}
         question['opts'].append(option)
         # insert or append the question object as appropriate.
         if isinstance(index,int):

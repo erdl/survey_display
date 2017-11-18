@@ -54,6 +54,7 @@ options parent opts selected =
       selector
         { itm = parent , opt = opt.code }
         opt.text
+        opt.option_color
         ( is_selected opt.code )
       )
   in
@@ -89,16 +90,23 @@ actor ( class , text ) input active =
 
 
 -- generate a button which fires off a `Selection`
+-- button color is determined by HEX value retrieved from the database
 -- event when clicked, and can have it's membership
 -- in the `"selected"` class toggled with a bool.
-selector : Selection -> Txt -> Bool -> Html Msg
-selector selection text selected =
-  Html.button
-    [ He.onClick ( User ( Select selection ) )
-    , Ha.classList
-      [ ( "selected" , selected )
-      , ( "selector" , True   ) ]
-    ]
-    [ Html.text text ]
-
-
+selector : Selection -> Txt -> HexColor -> Bool -> Html Msg
+selector selection text hexcolor selected =
+  let
+    customStyle =
+      Ha.style
+        [
+          ("backgroundColor", hexcolor)
+        ]
+  in
+      Html.button
+      [ He.onClick ( User ( Select selection ) )
+      , Ha.classList
+        [ ( "selected" , selected )
+        , ( "selector" , True   ) ]
+      , customStyle
+      ]
+      [ Html.text text ]

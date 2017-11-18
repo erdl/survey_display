@@ -78,6 +78,10 @@ type alias Seconds = Int
 -- the url of the host server.
 type alias Server = String
 
+-- type alias to clarify what a string represents
+-- the color to be rendered as background-color on the option button
+type alias HexColor = String
+
 -- represents an option that may be selected as
 -- the response to a given question.
 type alias Option =
@@ -121,6 +125,3 @@ type alias Response =
   , uuid : Uid
   , sels : List Selection
   }
-
-
-
