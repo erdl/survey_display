@@ -9049,9 +9049,9 @@ var _user$project$Types$Deployment = F3(
 	function (a, b, c) {
 		return {mode: a, code: b, pgrm: c};
 	});
-var _user$project$Types$Option = F2(
-	function (a, b) {
-		return {text: a, code: b};
+var _user$project$Types$Option = F3(
+	function (a, b, c) {
+		return {text: a, code: b, option_color: c};
 	});
 var _user$project$Types$Question = F3(
 	function (a, b, c) {
@@ -9104,9 +9104,10 @@ var _user$project$Types$User = function (a) {
 };
 
 var _user$project$Comms$jd_option = function () {
+	var option_color = A2(_elm_lang$core$Json_Decode$field, 'option_color', _elm_lang$core$Json_Decode$string);
 	var code = A2(_elm_lang$core$Json_Decode$field, 'code', _elm_lang$core$Json_Decode$int);
 	var text = A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string);
-	return A3(_elm_lang$core$Json_Decode$map2, _user$project$Types$Option, text, code);
+	return A4(_elm_lang$core$Json_Decode$map3, _user$project$Types$Option, text, code, option_color);
 }();
 var _user$project$Comms$jd_question = function () {
 	var opts = A2(
@@ -9307,8 +9308,26 @@ var _user$project$Comms$Comm = F3(
 		return {send: a, read: b, wrap: c};
 	});
 
-var _user$project$Components$selector = F3(
-	function (selection, text, selected) {
+var _user$project$Components$insert_breaks_into_text = function (text) {
+	return A2(
+		_elm_lang$core$List$intersperse,
+		A2(
+			_elm_lang$html$Html$br,
+			{ctor: '[]'},
+			{ctor: '[]'}),
+		A2(
+			_elm_lang$core$List$map,
+			_elm_lang$html$Html$text,
+			A2(_elm_lang$core$String$split, ' ', text)));
+};
+var _user$project$Components$selector = F4(
+	function (selection, text, hexcolor, selected) {
+		var customStyle = _elm_lang$html$Html_Attributes$style(
+			{
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: 'backgroundColor', _1: hexcolor},
+				_1: {ctor: '[]'}
+			});
 		return A2(
 			_elm_lang$html$Html$button,
 			{
@@ -9328,14 +9347,14 @@ var _user$project$Components$selector = F3(
 								_1: {ctor: '[]'}
 							}
 						}),
-					_1: {ctor: '[]'}
+					_1: {
+						ctor: '::',
+						_0: customStyle,
+						_1: {ctor: '[]'}
+					}
 				}
 			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text(text),
-				_1: {ctor: '[]'}
-			});
+			_user$project$Components$insert_breaks_into_text(text));
 	});
 var _user$project$Components$actor = F3(
 	function (_p0, input, active) {
@@ -9396,10 +9415,11 @@ var _user$project$Components$options = F3(
 			}
 		};
 		var mkSelector = function (opt) {
-			return A3(
+			return A4(
 				_user$project$Components$selector,
 				{itm: parent, opt: opt.code},
 				opt.text,
+				opt.option_color,
 				is_selected(opt.code));
 		};
 		return A2(
