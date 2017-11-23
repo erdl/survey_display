@@ -5,6 +5,7 @@ import Html.Events as He
 import Html exposing (Html)
 import Types exposing (..)
 import Dict exposing (Dict)
+import String
 
 -- this module contains 'primitive' components that are
 -- used to construct surveys.
@@ -109,4 +110,13 @@ selector selection text hexcolor selected =
         , ( "selector" , True   ) ]
       , customStyle
       ]
-      [ Html.text text ]
+      (insert_breaks_into_text text)
+
+-- function to transoform button text such that it is split by
+-- spaces and stacked on each other
+-- output in the form [Html, br, Html, br...,Html]
+insert_breaks_into_text : Txt -> List (Html Msg)
+insert_breaks_into_text text =
+  String.split " " text
+    |> List.map Html.text
+    |> List.intersperse (Html.br [] [])
