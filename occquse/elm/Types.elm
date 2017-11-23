@@ -87,6 +87,7 @@ type alias HexColor = String
 type alias Option =
   { text : Txt
   , code : Uid
+  , option_color: HexColor
   }
 
 
