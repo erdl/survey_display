@@ -8,7 +8,7 @@ import Http
 
 
 
--- shorthand record describing the fundamental 
+-- shorthand record describing the fundamental
 -- units of a server communication.
 type alias Comm a msg =
   { send : Server
@@ -65,14 +65,14 @@ push_archive config arch =
 
 -- process a server response, possibly generating a `Pgrm`.
 process_rsp : Maybe Pgrm -> Config -> Rsp -> Maybe (Pgrm,Config)
-process_rsp pgrm conf rsp = 
+process_rsp pgrm conf rsp =
   case pgrm of
     -- if `pgrm` exists, `rsp`.
     Just pgrm ->
       case rsp of
         Update deployment ->
           Just ( apply_update pgrm conf deployment )
-        
+
         Upload rsp ->
           Just ( assess_upload pgrm rsp , conf )
 
@@ -102,7 +102,7 @@ initialize_pgrm conf result =
           }
       in
         Just ( pgrm_new , conf_new )
-        
+
     Err err ->
       let _ = Debug.log "http error" err
       in Nothing
@@ -215,5 +215,6 @@ jd_option =
   let
     text = Jd.field "text" Jd.string
     code = Jd.field "code" Jd.int
+    option_color = Jd.field "option_color" Jd.string
   in
-    Jd.map2 Option text code
+    Jd.map3 Option text code option_color
