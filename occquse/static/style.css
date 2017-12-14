@@ -2,7 +2,7 @@ html {
   font-family: 'Roboto', sans-serif;
   text-align: center;
   font-weight: 900;
-  width: 80%;
+  width: 95%;
   margin: auto;
   padding: 8px;
 
@@ -14,16 +14,16 @@ button {
   padding: auto;
   text-align: center;
   display: inline-block;
-  font-size: 20px;
+  font-size: 30px;
 
   box-shadow: 2px 5px 10px #bababa;
   border-radius: 5px;
 
-  margin: 10px;
+  margin: 5px;
   vertical-align: middle;
 
-  height: 160px;
-  width: 160px;
+  height: 215px;
+  width: 215px;
 }
 
 button:disabled {
@@ -43,7 +43,7 @@ button:disabled {
 }
 
 .question-text {
-  font-size: 30px;
+  font-size: 40px;
   color: #848484;
   padding: 8px;
 }
