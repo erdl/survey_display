@@ -58,10 +58,43 @@ button:disabled {
   background-color: #38908A;
 
   margin-top: 50px;
+  margin-bottom: 300px;
   width: 960px;
   font-size: 30px;
 }
 
 .submit-button:disabled {
   background-color: #87BCB8;
+}
+
+.logo {
+  max-height: 50%;
+  max-width: 50%;
+}
+
+.inner-logo {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  display: block;
+}
+
+.logo-container {
+  height: 100%;
+  width: 20%;
+  display: inline-block;
+  padding-bottom: 20px;
+}
+
+#center-logos {
+  height: 100%;
+  width: 40%;
+  margin: auto;
+}
+
+#logo-box {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: white;
 }
