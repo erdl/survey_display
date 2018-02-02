@@ -111,3 +111,36 @@ def execute(cmd):
     data = cur.fetchall()
     con.close()
     return data
+
+# check to see if a given survey has been set to active via survey_admin
+def is_active(url):
+    
+    # get possible URLS that are active
+    get_url_query = "SELECT url_text FROM deployed_url WHERE is_deployed = TRUE"
+    
+    if not "database" in CONFIG:
+        raise Exception("no value for `database` in `psql` configuration!")
+    keys = ("user","host","password","database")
+    conf = { key : CONFIG[key] for key in keys if key in CONFIG }
+    con = psql.connect(**conf)
+    cur = con.cursor()
+    cur.execute(get_url_query)
+    
+    deployed_url_list = [x[0] for x in cur.fetchall()]
+
+    con.close()
+    # see if url string is in the result of the query
+    # use this to avoid allowing user input to avoid any type of sql injection
+    try:
+        deployed_url_list.index(url)
+        return True
+    except ValueError:
+        return False
+
+    # if it isn't then return false to redirect user to some default page
+
+
+
+
+
+    
