@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from . import core
+from .utils import psql
 import flask
 
 
@@ -27,7 +28,10 @@ def callback(survey):
 # user survey access route...
 @app.route('/<survey>', methods = ['GET'])
 def surveys(survey):
-    print('survey-request: ',survey) 
-    return core.survey_app(survey,'kiosk')
+    if psql.is_active(survey):
+        print('survey-request: ',survey) 
+        return core.survey_app(survey,'kiosk')
+    else:
+        return "INVALID SURVEY URL"
 
 
