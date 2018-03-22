@@ -116,7 +116,7 @@ def execute(cmd):
 def is_active(url):
     
     # get possible URLS that are active
-    get_url_query = "SELECT url_text FROM deployed_url WHERE is_deployed = TRUE"
+    get_url_query = "SELECT url_text FROM deployed_url WHERE is_active = TRUE"
     
     if not "database" in CONFIG:
         raise Exception("no value for `database` in `psql` configuration!")
