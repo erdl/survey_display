@@ -16,7 +16,7 @@ CMD = """
     "public"."option".option_id,
     "public"."option"."text",
     "public".kiosk_survey.deployed_url_id,
-    "public".deployed_url.is_kioski,
+    "public".deployed_url.is_kiosk,
     "public"."option"."option_color"
     FROM
     "public".kiosk_survey
