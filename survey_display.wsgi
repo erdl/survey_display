@@ -8,5 +8,5 @@ sys.path.insert(0,modpath)
 
 # import our app as `application` so that
 # mod_wsgi knows that it is our target.
-from occquse import app as application
+from survey_display import app as application
 
