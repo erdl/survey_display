@@ -3,8 +3,8 @@
 from setuptools import setup
 
 package = {
-    "name": 'occquse',
-    "packages": ['occquse'],
+    "name": 'survey_display',
+    "packages": ['survey_display'],
     "include_package_data": True,
     "install_requires": ['flask','toml']
 }
