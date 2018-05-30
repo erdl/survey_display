@@ -1,28 +1,43 @@
 #!/usr/bin/env python3
 from collections import namedtuple
+import datetime
 
-
-Response = namedtuple('rsp',['url','survey','question','option','timestamp'])
+Response = namedtuple('Response',
+    ['survey_info_id', 
+    'question_id', 
+    'deployed_url_id', 
+    'option_id', 
+    'timestamp'])
 
 # response format returned by survey-app:
-# { time = 123
-# , code = 456
-# , sels = [ { itm = 123, opt = 456 }, ... ]
+# { time = 123        <-- unix timestamp
+# , uuid = 456        <-- deployed_url_id
+# , suid = 123213     <-- survey_info_id
+# , sels = [ { itm = 123, opt = 456 }, ... ] <-- itm = question_id, opt = option_id
 # }
 
 
-# convert a response dict into a set or rows, with
-# each row fully describing a single given answer.
+# This function takes in responses as described in the above format, converts them into 'kiosk.response' rows,
+# and returns a list of those rows.
 def convert_response(rsp):
-    time = rsp['time']
-    suid = rsp['suid']
-    uuid = rsp['uuid']
-    sels = rsp['sels']
-    mkrsp = lambda s: Response(uuid,suid,s['itm'],s['opt'],time)
-    responses = []
-    for selection in sels:
-        responses.append(mkrsp(selection))
-    return responses
+    unix_timestamp = rsp['time']
+
+    # convert unix timestamp to time format required by kiosk.response table
+    formatted_timestamp = datetime.datetime.fromtimestamp(unix_timestamp).strftime(
+            '%Y-%m-%d %H:%M:%S')
+
+    survey_info_id = rsp['suid']
+    deployed_url_id = rsp['uuid']
+    selected_options = rsp['sels']
+
+    make_response_row = lambda s: Response(
+            survey_info_id, 
+            s['itm'], 
+            deployed_url_id,
+            s['opt'], 
+            formatted_timestamp)
+
+    return [make_response_row(selection) for selection in selected_options]
 
 
 # generate a survey spec from a survey name & config.
