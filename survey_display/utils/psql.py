@@ -140,7 +140,31 @@ def is_active(url):
     # if it isn't then return false to redirect user to some default page
 
 
+# insert responses into the database
+def insert_responses(responses):
 
+    if not "database" in CONFIG:
+        raise Exception("no value for `database` in `psql` configuration!")
+    keys = ("user","host","password","database")
+    conf = { key : CONFIG[key] for key in keys if key in CONFIG }
+    con = psql.connect(**conf)
+    cur = con.cursor()
 
+    query = "INSERT INTO response (survey_info_id, question_id, deployed_url_id, option_id, timestamp) \
+            VALUES (%s, %s, %s, %s, %s)"
 
+    try:
+        for response in responses:
+            cur.execute(query, response)
+
+        con.commit()
+
+        print("Inserted Row(s): ")
+        print(*responses, sep='\n')
+
+    except psql.Error as e:
+        print(e)
+
+    finally:
+        con.close()
     
