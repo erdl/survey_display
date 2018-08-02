@@ -2,10 +2,12 @@ module Components exposing (..)
 
 import Html.Attributes as Ha
 import Html.Events as He
-import Html exposing (Html)
+import Html exposing (..)
 import Types exposing (..)
 import Dict exposing (Dict)
 import String
+
+import Json.Encode exposing (string)
 
 -- this module contains 'primitive' components that are
 -- used to construct surveys.
@@ -36,9 +38,7 @@ question spec selected =
 question_text : Txt -> Html Msg
 question_text text =
   Html.h2
-    [ Ha.classList [ ( "question-text", True ) ] ]
-    [ Html.text text ]
-
+    [ Ha.classList [("question-text", True)], (Ha.property  "innerHTML" <| string text)  ] []
 
 -- accepts a question-id, list of options, and (if exists),
 -- the id of the currently selected option.  Generates a div
