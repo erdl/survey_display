@@ -9447,13 +9447,16 @@ var _user$project$Components$question_text = function (text) {
 					_0: {ctor: '_Tuple2', _0: 'question-text', _1: true},
 					_1: {ctor: '[]'}
 				}),
-			_1: {ctor: '[]'}
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html_Attributes$property,
+					'innerHTML',
+					_elm_lang$core$Json_Encode$string(text)),
+				_1: {ctor: '[]'}
+			}
 		},
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html$text(text),
-			_1: {ctor: '[]'}
-		});
+		{ctor: '[]'});
 };
 var _user$project$Components$question = F2(
 	function (spec, selected) {
