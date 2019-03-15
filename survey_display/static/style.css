@@ -9,12 +9,16 @@ html {
 
 }
 
+.kiosk {
+  margin-top: 100px;
+}
+
 button {
   color: #383838;
   padding: auto;
   text-align: center;
   display: inline-block;
-  font-size: 30px;
+  font-size: 26px;
 
   box-shadow: 2px 5px 10px #bababa;
   border-radius: 5px;
@@ -22,8 +26,8 @@ button {
   margin: 5px;
   vertical-align: middle;
 
-  height: 215px;
-  width: 215px;
+  height: 190px;
+  width: 190px;
 }
 
 button:disabled {
@@ -38,7 +42,7 @@ button:disabled {
 }
 
 .question {
-  padding: 40px;
+  padding: 0px;
   border-bottom: 2px solid #d8d8d8;
 }
 
